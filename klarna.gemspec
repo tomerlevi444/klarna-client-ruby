@@ -1,13 +1,13 @@
 # -*- encoding: utf-8 -*-
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'klarna-client/version'
+require 'klarna/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = "klarna-client"
-  gem.version       = Klarna::Client::VERSION
-  gem.authors       = ["Tomer Alon"]
-  gem.email         = ["tomer.alon@klarna.com"]
+  gem.name          = "klarna"
+  gem.version       = Klarna::VERSION
+  gem.authors       = ["Daniel Salmeron Amselem"]
+  gem.email         = ["daniel.amselem@klarna.com"]
   gem.description   = %q{TODO: Write a gem description}
   gem.summary       = %q{TODO: Write a gem summary}
   gem.homepage      = ""
