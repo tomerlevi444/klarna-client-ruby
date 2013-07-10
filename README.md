@@ -18,7 +18,20 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+# 1st way (one store configuration)
+Klarna.configure do |config|
+  config.hostname = 'payment.testdrive.klarna.com'
+  config.port = 443
+  config.store_id = 7
+  config.store_secret = 'dr.alban'
+end
+
+Klarna::Client.get_addresses('410321-9202',2,5,'')
+
+
+# 2nd way (multiple stores - each store has its own client)
+client = Klarna::Client.new(:hostname => 'payment.testdrive.klarna.com', :port => 443 :store_id => 7 :store_secret => 'dr.alban')
+client.get_addresses('410321-9202',2,5,'')
 
 ## Contributing
 
