@@ -6,13 +6,32 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
+    activesupport (4.0.0)
+      i18n (~> 0.6, >= 0.6.4)
+      minitest (~> 4.2)
+      multi_json (~> 1.3)
+      thread_safe (~> 0.1)
+      tzinfo (~> 0.3.37)
+    atomic (1.1.10)
     coderay (1.0.9)
+    columnize (0.3.6)
+    debugger (1.6.1)
+      columnize (>= 0.3.1)
+      debugger-linecache (~> 1.2.0)
+      debugger-ruby_core_source (~> 1.2.3)
+    debugger-linecache (1.2.0)
+    debugger-ruby_core_source (1.2.3)
     diff-lcs (1.2.4)
+    factory_girl (4.2.0)
+      activesupport (>= 3.0.0)
     fuubar (1.1.0)
       rspec (~> 2.0)
       rspec-instafail (~> 0.2.0)
       ruby-progressbar (~> 1.0.0)
+    i18n (0.6.4)
     method_source (0.8.1)
+    minitest (4.7.5)
+    multi_json (1.7.7)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
@@ -28,11 +47,16 @@ GEM
     rspec-mocks (2.14.1)
     ruby-progressbar (1.0.2)
     slop (3.4.5)
+    thread_safe (0.1.0)
+      atomic
+    tzinfo (0.3.37)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  debugger
+  factory_girl
   fuubar
   klarna!
   pry
