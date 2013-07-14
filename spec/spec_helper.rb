@@ -1,1 +1,1 @@
-require './lib/klarna/connection'
+require_relative '../lib/klarna'
