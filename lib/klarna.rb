@@ -1,5 +1,3 @@
-require 'digest'
-
 require 'klarna/version'
 require 'klarna/client'
 require 'klarna/configuration'
