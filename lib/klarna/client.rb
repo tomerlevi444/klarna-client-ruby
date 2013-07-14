@@ -1,3 +1,5 @@
+require 'digest'
+
 module Klarna
   class Client
     def initialize(options = {})
