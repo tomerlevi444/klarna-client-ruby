@@ -5,7 +5,7 @@ describe Klarna::Connection do
     context 'given hostname and port' do
       let(:xmlrpc_hostname) { 'klarna_host' }
       let(:xmlrpc_port)     { 12345 }
-      let(:connection)      { Klarna::Client::Connection.new(xmlrpc_hostname, xmlrpc_port) }
+      let(:connection)      { Klarna::Connection.new(xmlrpc_hostname, xmlrpc_port) }
 
       it 'initializes the hostname attribute' do
         expect(connection.xmlrpc_hostname).to eq(xmlrpc_hostname)
@@ -15,8 +15,5 @@ describe Klarna::Connection do
         expect(connection.xmlrpc_port).to eq(xmlrpc_port)
       end
     end
-  end
-
-  describe '#get_addresses' do
   end
 end

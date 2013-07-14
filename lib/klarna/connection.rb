@@ -31,10 +31,10 @@ module Klarna
     def headers
       {
         'Accept-Encoding' => 'deflate,gzclient_ip',
-        'Content-Type' => 'text/xml;charset=iso-8859-1',
-        'Accept-Charset' => 'UTF-8,ISO-8859-1,US-ASCII',
-        'Connection' => 'close',
-        'User-Agent' => 'ruby/xmlrpc'
+        'Content-Type'    => 'text/xml;charset=iso-8859-1',
+        'Accept-Charset'  => 'UTF-8,ISO-8859-1,US-ASCII',
+        'Connection'      => 'close',
+        'User-Agent'      => 'ruby/xmlrpc'
       }
     end
 
