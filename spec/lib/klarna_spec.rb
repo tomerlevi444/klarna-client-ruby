@@ -1,26 +1,28 @@
 require 'spec_helper'
 
 describe Klarna do
+  include ConfigurationHelper
+
   describe '.configure' do
     context 'given a configuration block' do
       before do
-        setup_configuration('kred.test.machine', 443, 1, 'supersecret')
+        setup_configuration
       end
 
-      it 'returns "kred.test.machine" for hostname' do
-        expect(Klarna.configuration.hostname).to eq('kred.test.machine')
+      it 'sets "kred.test.machine" to Kred.configuration.hostname' do
+        expect(Klarna.configuration.hostname).to eq(ENV['KLARNA_URL'])
       end
 
-      it 'returns 443 for port' do
-        expect(Klarna.configuration.port).to eq(443)
+      it 'sets 443 to Kred.configuration.port' do
+        expect(Klarna.configuration.port).to eq(ENV['KLARNA_PORT'])
       end
 
-      it 'returns 1 for store_id' do
-        expect(Klarna.configuration.store_id).to eq(1)
+      it 'sets 1 to Kred.configuration.store_id' do
+        expect(Klarna.configuration.store_id).to eq(ENV['KLARNA_STORE_ID'].to_i)
       end
 
-      it 'returns "supersecret" for store_secret' do
-        expect(Klarna.configuration.store_secret).to eq('supersecret')
+      it 'sets "supersecret" to Kred.configuration.store_secret' do
+        expect(Klarna.configuration.store_secret).to eq(ENV['KLARNA_STORE_SECRET'])
       end
     end
   end

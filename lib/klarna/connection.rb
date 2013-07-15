@@ -37,6 +37,5 @@ module Klarna
         'User-Agent'      => 'ruby/xmlrpc'
       }
     end
-
   end
 end

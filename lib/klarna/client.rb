@@ -1,5 +1,7 @@
 require 'digest'
 
+require 'klarna/decorators/get_addresses_decorator'
+
 module Klarna
   class Client
     def initialize(options = {})
@@ -14,7 +16,9 @@ module Klarna
     end
 
     def get_addresses(pno, pno_encoding, type, client_ip)
-      connection.call('get_addresses', '4.1', 'ruby_client_SLOT', pno, @store_id, secret(pno), pno_encoding, type, client_ip)
+      response = connection.call('get_addresses', '4.1', 'ruby_client_SLOT', pno, @store_id, secret(pno), pno_encoding, type, client_ip)
+
+      ::Klarna::Decorators::GetAddressesDecorator.new(response).addresses
     end
 
     private
@@ -28,6 +32,7 @@ module Klarna
 
       Digest::SHA512.base64digest(message)
     end
+
   end
 end
 

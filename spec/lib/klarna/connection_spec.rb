@@ -1,19 +1,13 @@
 require 'spec_helper'
 
 describe Klarna::Connection do
-  describe '#initialize' do
-    context 'given hostname and port' do
-      let(:xmlrpc_hostname) { 'klarna_host' }
-      let(:xmlrpc_port)     { 12345 }
-      let(:connection)      { Klarna::Connection.new(xmlrpc_hostname, xmlrpc_port) }
+  subject { build(:connection) }
 
-      it 'initializes the hostname attribute' do
-        expect(connection.xmlrpc_hostname).to eq(xmlrpc_hostname)
-      end
+  describe '#call' do
+    it 'delegates method execution to a XMLRPC::Client instance' do
+      expect_any_instance_of(::XMLRPC::Client).to receive(:call).with('endpoint', 'arg1', 'arg2')
 
-      it 'initializes the port attribute' do
-        expect(connection.xmlrpc_port).to eq(xmlrpc_port)
-      end
+      subject.call('endpoint', 'arg1', 'arg2')
     end
   end
 end
