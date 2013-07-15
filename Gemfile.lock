@@ -12,9 +12,12 @@ GEM
       multi_json (~> 1.3)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
+    addressable (2.3.5)
     atomic (1.1.10)
     coderay (1.0.9)
     columnize (0.3.6)
+    crack (0.4.0)
+      safe_yaml (~> 0.9.0)
     debugger (1.6.1)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.2.0)
@@ -22,6 +25,7 @@ GEM
     debugger-linecache (1.2.0)
     debugger-ruby_core_source (1.2.3)
     diff-lcs (1.2.4)
+    dotenv (0.8.0)
     factory_girl (4.2.0)
       activesupport (>= 3.0.0)
     fuubar (1.1.0)
@@ -46,18 +50,26 @@ GEM
     rspec-instafail (0.2.4)
     rspec-mocks (2.14.1)
     ruby-progressbar (1.0.2)
+    safe_yaml (0.9.4)
     slop (3.4.5)
     thread_safe (0.1.0)
       atomic
     tzinfo (0.3.37)
+    vcr (2.5.0)
+    webmock (1.13.0)
+      addressable (>= 2.2.7)
+      crack (>= 0.3.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   debugger
+  dotenv
   factory_girl
   fuubar
   klarna!
   pry
   rspec
+  vcr
+  webmock
