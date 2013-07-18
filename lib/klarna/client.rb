@@ -1,9 +1,13 @@
 require 'digest'
 
-require 'klarna/decorators/get_addresses_decorator'
+require 'klarna/methods/get_addresses'
+require 'klarna/methods/reserve_amount'
 
 module Klarna
   class Client
+    VERSION = '4.1'
+    NAME    = 'ruby_client'
+
     def initialize(options = {})
       @hostname     = options[:hostname]     || Klarna.configuration.hostname
       @port         = options[:port]         || Klarna.configuration.port
@@ -11,28 +15,31 @@ module Klarna
       @store_secret = options[:store_secret] || Klarna.configuration.store_secret
     end
 
-    def self.get_addresses(pno, pno_encoding, type, client_ip)
-      new.get_addresses(pno, pno_encoding, type, client_ip)
+    def get_addresses(params)
+      call_method(Klarna::Methods::GetAddresses, params)
     end
 
-    def get_addresses(pno, pno_encoding, type, client_ip)
-      response = connection.call('get_addresses', '4.1', 'ruby_client_SLOT', pno, @store_id, secret(pno), pno_encoding, type, client_ip)
+    def self.get_addresses(params)
+      new.get_addresses(params)
+    end
 
-      ::Klarna::Decorators::GetAddressesDecorator.new(response).addresses
+    def reserve_amount(params)
+      call_method(Klarna::Methods::ReserveAmount, params)
+    end
+
+    def self.reserve_amount(params)
+      new.reserve_amount(params)
     end
 
     private
+
+    def call_method(method, params)
+      connection.call(method.name, VERSION, NAME, *method.params(@store_id, @store_secret, params))
+    end
 
     def connection
       @connection ||= Klarna::Connection.new(@hostname, @port)
     end
 
-    def secret(pno)
-      message = [@store_id, pno, @store_secret].join(':')
-
-      Digest::SHA512.base64digest(message)
-    end
-
   end
 end
-
