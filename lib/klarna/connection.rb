@@ -6,16 +6,16 @@ module Klarna
       @xmlrpc_hostname = xmlrpc_hostname
       @xmlrpc_port     = xmlrpc_port
 
-      client.http_header_extra = headers
+      xmlrpc_client.http_header_extra = headers
     end
 
     def call(method, *args)
-      client.call(method, *args)
+      xmlrpc_client.call(method, *args)
     end
 
     private
 
-    def client
+    def xmlrpc_client
       @xmlrpc_client ||= ::XMLRPC::Client.new_from_hash({
         :host    => @xmlrpc_hostname,
         :path    => '/',
