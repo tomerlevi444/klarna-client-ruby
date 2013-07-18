@@ -8,8 +8,8 @@ Gem::Specification.new do |gem|
   gem.version       = Klarna::VERSION
   gem.authors       = ["Daniel Salmeron Amselem"]
   gem.email         = ["daniel.amselem@klarna.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = %q{XMLRPC Client to Klarna's API.}
+  gem.summary       = %q{XMLRPC Client to Klarna's API.}
   gem.homepage      = ""
 
   gem.add_development_dependency "rspec"
