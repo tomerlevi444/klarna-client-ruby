@@ -19,7 +19,7 @@ module Klarna
       private
 
       def self.digest(api_version, client_name, store_id, rno, optional_info, store_secret)
-        version = api_version.gsub('.', ':')
+        version                  = api_version.gsub('.', ':')
         optional_info_for_digest = optional_info_for_digest(optional_info)
 
         array = [version, client_name, store_id, rno, *optional_info_for_digest, store_secret]
@@ -39,14 +39,12 @@ module Klarna
       ]
 
       def self.optional_info_for_digest(optional_info)
-        array = []
-
-        if optional_info
-          array.concat optional_info_values(optional_info)
-          array.concat articles(optional_info)
+        [].tap do |array|
+          if optional_info
+            array.concat optional_info_values(optional_info)
+            array.concat articles(optional_info) if optional_info[:artnos]
+          end
         end
-
-        array
       end
 
       def self.optional_info_values(optional_info)
@@ -54,14 +52,12 @@ module Klarna
       end
 
       def self.articles(optional_info)
-        articles = []
-
-        optional_info[:artnos].each do |article|
-          articles.push article[:artno]
-          articles.push article[:qty]
+        [].tap do |articles|
+          optional_info[:artnos].each do |article|
+            articles.push article[:artno]
+            articles.push article[:qty]
+          end
         end
-
-        articles
       end
 
     end
