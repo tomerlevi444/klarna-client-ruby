@@ -10,7 +10,7 @@ module Klarna
       def self.params(store_id, store_secret, api_version, client_name, params)
         [
           store_id,
-          digest(store_id, store_secret, api_version, client_name, params),
+          digest(api_version, client_name, store_id, params[:rno], params[:optional_info], store_secret),
           params[:rno],
           params.fetch(:optional_info, {})
         ]
@@ -18,43 +18,50 @@ module Klarna
 
       private
 
-      OPTIONAL_INFO_KEYS =
-        [
-          :bclass,
-          :cust_no,
-          :flags,
-          :ocr,
-          :orderid1,
-          :orderid2,
-          :reference,
-          :reference_code
-        ]
+      def self.digest(api_version, client_name, store_id, rno, optional_info, store_secret)
+        version = api_version.gsub('.', ':')
+        optional_info_for_digest = optional_info_for_digest(optional_info)
 
-      def self.digest(store_id, store_secret, api_version, client_name, params)
-        digest_array = [api_version.gsub(".", ":"), client_name, store_id, params[:rno]]
-
-        optional_info = params[:optional_info]
-        add_optional_info(digest_array, optional_info) unless optional_info.nil?
-
-        digest_array.push(store_secret)
-
-        message = digest_array.join(':')
+        message = [version, client_name, store_id, rno, *optional_info_for_digest, store_secret].join(':')
         Digest::SHA512.base64digest(message)
       end
 
-      def self.add_optional_info(digest_array, optional_info)
-        OPTIONAL_INFO_KEYS.each do |key|
-          if optional_info.has_key?(key)
-            digest_array.push(optional_info[key])
-          end
+
+      OPTIONAL_INFO_KEYS = [
+        :bclass,
+        :cust_no,
+        :flags,
+        :ocr,
+        :orderid1,
+        :orderid2,
+        :reference,
+        :reference_code
+      ]
+
+      def self.optional_info_for_digest(optional_info)
+        array = []
+
+        if optional_info
+          array.concat optional_info_values(optional_info)
+          array.concat articles(optional_info)
         end
 
-        if optional_info.has_key?(:artnos)
-          optional_info[:artnos].each do |article|
-            digest_array.push(article[:artno])
-            digest_array.push(article[:qty])
-          end
+        array
+      end
+
+      def self.optional_info_values(optional_info)
+        optional_info.values_at(*OPTIONAL_INFO_KEYS).compact
+      end
+
+      def self.articles(optional_info)
+        articles = []
+
+        optional_info[:artnos].each do |article|
+          articles.push article[:artno]
+          articles.push article[:qty]
         end
+
+        articles
       end
 
     end
