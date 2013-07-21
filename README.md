@@ -1,6 +1,6 @@
 # Klarna::Client
 
-TODO: Write a gem description
+An XMLRPC client for Klarna's API.
 
 ## Installation
 
