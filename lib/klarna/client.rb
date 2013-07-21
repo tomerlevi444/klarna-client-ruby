@@ -1,12 +1,11 @@
-require 'digest'
-
 require 'klarna/methods/get_addresses'
 require 'klarna/methods/reserve_amount'
+require 'klarna/methods/activate'
 
 module Klarna
   class Client
-    VERSION = '4.1'
-    NAME    = 'ruby_client'
+    KLARNA_API_VERSION = '4.1'
+    CLIENT_NAME        = 'ruby_client'
 
     def initialize(options = {})
       @hostname     = options[:hostname]     || Klarna.configuration.hostname
@@ -31,10 +30,19 @@ module Klarna
       new.reserve_amount(params)
     end
 
+    def activate(params)
+      call_method(Klarna::Methods::Activate, params)
+    end
+
+    def self.activate(params)
+      new.activate(params)
+    end
+
     private
 
     def call_method(method, params)
-      connection.call(method.name, VERSION, NAME, *method.params(@store_id, @store_secret, params))
+      method_params = method.params(@store_id, @store_secret, KLARNA_API_VERSION, CLIENT_NAME, params)
+      connection.call(method.name, KLARNA_API_VERSION, CLIENT_NAME, *method_params)
     end
 
     def connection
