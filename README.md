@@ -16,6 +16,12 @@ Or install it yourself as:
 
     $ gem install klarna-client
 
+## Supported methods
+
+  * [get_addresses](https://integration.klarna.com/en/api/advanced-integration/functions/getaddresses)
+  * [reserve_amount](https://integration.klarna.com/en/api/advanced-integration/functions/reserveamount/)
+  * [activate](https://integration.klarna.com/en/api/advanced-integration/functions/activate)
+
 ## Usage
 
 ### Single store configuration
