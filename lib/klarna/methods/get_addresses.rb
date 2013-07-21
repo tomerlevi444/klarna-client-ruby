@@ -1,3 +1,5 @@
+require 'digest'
+
 module Klarna
   module Methods
     module GetAddresses
@@ -6,7 +8,7 @@ module Klarna
         'get_addresses'
       end
 
-      def self.params(store_id, store_secret, params)
+      def self.params(store_id, store_secret, api_version, client_name, params)
         [
           params[:pno],
           store_id,

@@ -19,9 +19,11 @@ describe Klarna::Methods::GetAddresses do
 
       let(:store_id)     { ENV['KLARNA_STORE_ID'] }
       let(:store_secret) { ENV['KLARNA_STORE_SECRET'] }
+      let(:api_version)  { Klarna::Client::KLARNA_API_VERSION }
+      let(:client_name)  { Klarna::Client::CLIENT_NAME }
 
       let(:method_params) do
-        subject.params(store_id, store_secret, params)
+        subject.params(store_id, store_secret, api_version, client_name, params)
       end
 
       it 'returns an array of 6 elements' do

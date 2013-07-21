@@ -1,3 +1,5 @@
+require 'digest'
+
 module Klarna
   module Methods
     module ReserveAmount
@@ -5,7 +7,7 @@ module Klarna
         'reserve_amount'
       end
 
-      def self.params(store_id, store_secret, params)
+      def self.params(store_id, store_secret, api_version, client_name, params)
         [
           params[:pno],
           params.fetch(:gender, ''),
