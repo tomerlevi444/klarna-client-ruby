@@ -41,8 +41,9 @@ module Klarna
     private
 
     def call_method(method, params)
-      method_params = method.params(@store_id, @store_secret, KLARNA_API_VERSION, CLIENT_NAME, params)
-      connection.call(method.name, KLARNA_API_VERSION, CLIENT_NAME, *method_params)
+      xmlrpc_params = method.xmlrpc_params(@store_id, @store_secret, KLARNA_API_VERSION, CLIENT_NAME, params)
+
+      connection.call(method.xmlrpc_name, KLARNA_API_VERSION, CLIENT_NAME, *xmlrpc_params)
     end
 
     def connection

@@ -1,13 +1,13 @@
-require 'digest'
+require 'klarna/digest'
 
 module Klarna
   module Methods
     module Activate
-      def self.name
+      def self.xmlrpc_name
         'activate'
       end
 
-      def self.params(store_id, store_secret, api_version, client_name, params)
+      def self.xmlrpc_params(store_id, store_secret, api_version, client_name, params)
         [
           store_id,
           digest(api_version, client_name, store_id, params[:rno], params[:optional_info], store_secret),
@@ -22,8 +22,8 @@ module Klarna
         version = api_version.gsub('.', ':')
         optional_info_for_digest = optional_info_for_digest(optional_info)
 
-        message = [version, client_name, store_id, rno, *optional_info_for_digest, store_secret].join(':')
-        Digest::SHA512.base64digest(message)
+        array = [version, client_name, store_id, rno, *optional_info_for_digest, store_secret]
+        Klarna::Digest.for(array)
       end
 
 

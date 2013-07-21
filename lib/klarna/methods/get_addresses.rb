@@ -1,14 +1,14 @@
-require 'digest'
+require 'klarna/digest'
 
 module Klarna
   module Methods
     module GetAddresses
 
-      def self.name
+      def self.xmlrpc_name
         'get_addresses'
       end
 
-      def self.params(store_id, store_secret, api_version, client_name, params)
+      def self.xmlrpc_params(store_id, store_secret, api_version, client_name, params)
         [
           params[:pno],
           store_id,
@@ -22,9 +22,9 @@ module Klarna
       private
 
       def self.digest(store_id, pno, store_secret)
-        message = [store_id, pno, store_secret].join(':')
+        array = [store_id, pno, store_secret]
 
-        Digest::SHA512.base64digest(message)
+        Klarna::Digest.for(array)
       end
 
     end

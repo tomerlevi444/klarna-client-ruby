@@ -3,13 +3,13 @@
 require 'spec_helper'
 
 describe Klarna::Methods::ReserveAmount do
-  describe '#name' do
+  describe '#xmlrpc_name' do
     it 'is reserve_amount' do
-      expect(subject.name).to eq('reserve_amount')
+      expect(subject.xmlrpc_name).to eq('reserve_amount')
     end
   end
 
-  describe '#params' do
+  describe '#xmlrpc_params' do
     context 'given the following input parameters' do
       let(:params) do
         {
@@ -68,7 +68,7 @@ describe Klarna::Methods::ReserveAmount do
       let(:client_name)  { Klarna::Client::CLIENT_NAME }
 
       let(:method_params) do
-        subject.params(store_id, store_secret, api_version, client_name, params)
+        subject.xmlrpc_params(store_id, store_secret, api_version, client_name, params)
       end
 
       it 'returns an array of 26 elements' do

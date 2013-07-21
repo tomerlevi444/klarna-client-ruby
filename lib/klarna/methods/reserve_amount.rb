@@ -1,13 +1,13 @@
-require 'digest'
+require 'klarna/digest'
 
 module Klarna
   module Methods
     module ReserveAmount
-      def self.name
+      def self.xmlrpc_name
         'reserve_amount'
       end
 
-      def self.params(store_id, store_secret, api_version, client_name, params)
+      def self.xmlrpc_params(store_id, store_secret, api_version, client_name, params)
         [
           params[:pno],
           params.fetch(:gender, ''),
@@ -41,11 +41,10 @@ module Klarna
       private
 
       def self.digest(store_id, pno, amount, store_secret)
-        message = [store_id, pno, amount, store_secret].join(':')
+        array = [store_id, pno, amount, store_secret]
 
-        Digest::SHA512.base64digest(message)
+        Klarna::Digest.for(array)
       end
-
     end
   end
 end

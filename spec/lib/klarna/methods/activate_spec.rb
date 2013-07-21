@@ -1,13 +1,13 @@
 require 'spec_helper'
 
 describe Klarna::Methods::Activate do
-  describe '#name' do
+  describe '#xmlrpc_name' do
     it 'is activate' do
-      expect(subject.name).to eq('activate')
+      expect(subject.xmlrpc_name).to eq('activate')
     end
   end
 
-  describe '#params' do
+  describe '#xmlrpc_params' do
     context 'given the following input parameters' do
       let(:params)       { {:rno => '123456'} }
 
@@ -17,7 +17,7 @@ describe Klarna::Methods::Activate do
       let(:client_name)  { Klarna::Client::CLIENT_NAME }
 
       let(:method_params) do
-        subject.params(store_id, store_secret, api_version, client_name, params)
+        subject.xmlrpc_params(store_id, store_secret, api_version, client_name, params)
       end
 
       it 'returns an array of 4 elements' do
