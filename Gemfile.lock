@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    klarna (1.0.0)
+    klarna-client-ruby (1.0.0)
 
 GEM
   remote: https://rubygems.org/
@@ -68,7 +68,7 @@ DEPENDENCIES
   dotenv
   factory_girl
   fuubar
-  klarna!
+  klarna-client-ruby!
   pry
   rspec
   vcr
