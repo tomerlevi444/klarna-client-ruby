@@ -77,3 +77,7 @@ Modify the file to define the credentials of your Klarna's test API server:
   3. Commit your changes (`git commit -am 'Add some feature'`)
   4. Push to the branch (`git push origin my-new-feature`)
   5. Create new Pull Request
+
+## License
+
+[Apache 2.0](LICENSE)
