@@ -20,10 +20,17 @@ describe Klarna::Client do
     end
 
     let(:person_addresses_with_tno) do
-      person_addresses[0].unshift('410321-9202')
-      person_addresses[0][6] = person_addresses[0][6].to_i
-
-      person_addresses
+      [
+        [
+          '410321-9202',
+          'Testperson-se',
+          'Approved',
+          'Stårgatan 1',
+          '12345',
+          'Ankeborg',
+          209
+        ]
+      ]
     end
 
     let(:company_addresses) do
