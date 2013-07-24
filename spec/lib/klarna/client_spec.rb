@@ -19,6 +19,13 @@ describe Klarna::Client do
       ]
     end
 
+    let(:person_addresses_with_tno) do
+      person_addresses[0].unshift('410321-9202')
+      person_addresses[0][6] = person_addresses[0][6].to_i
+
+      person_addresses
+    end
+
     let(:company_addresses) do
       [
         [
@@ -65,14 +72,14 @@ describe Klarna::Client do
         end
       end
 
-      context 'given a person with TNO 46704455668' do
-        let(:tno) { '46704455668' }
+      context 'given a person with TNO 46701111111' do
+        let(:tno) { '46701111111' }
 
         it 'returns the expected response' do
-          VCR.use_cassette 'get_addresses for TNO 46704455668' do
+          VCR.use_cassette 'get_addresses for TNO 46701111111' do
             addresses = client.get_addresses(:tno => tno, :pno_encoding => 2, :type => 6)
 
-            expect(addresses).to eq(person_addresses)
+            expect(addresses).to eq(person_addresses_with_tno)
           end
         end
       end
@@ -107,14 +114,14 @@ describe Klarna::Client do
         end
       end
 
-      context 'given a person with TNO 46704455668' do
-        let(:tno) { '46704455668' }
+      context 'given a person with TNO 46701111111' do
+        let(:tno) { '46701111111' }
 
         it 'returns the expected response' do
-          VCR.use_cassette 'get_addresses for TNO 46704455668' do
+          VCR.use_cassette 'get_addresses for TNO 46701111111' do
             addresses = Klarna::Client.get_addresses(:tno => tno, :pno_encoding => 2, :type => 6)
 
-            expect(addresses).to eq(person_addresses)
+            expect(addresses).to eq(person_addresses_with_tno)
           end
         end
       end
