@@ -64,6 +64,18 @@ describe Klarna::Client do
           end
         end
       end
+
+      context 'given a person with TNO 46704455668' do
+        let(:tno) { '46704455668' }
+
+        it 'returns the expected response' do
+          VCR.use_cassette 'get_addresses for TNO 46704455668' do
+            addresses = client.get_addresses(:tno => tno, :pno_encoding => 2, :type => 6)
+
+            expect(addresses).to eq(person_addresses)
+          end
+        end
+      end
     end
 
     describe 'class method' do
@@ -91,6 +103,18 @@ describe Klarna::Client do
             addresses = Klarna::Client.get_addresses(:pno => pno, :pno_encoding => 2, :type => 5)
 
             expect(addresses).to eq(company_addresses)
+          end
+        end
+      end
+
+      context 'given a person with TNO 46704455668' do
+        let(:tno) { '46704455668' }
+
+        it 'returns the expected response' do
+          VCR.use_cassette 'get_addresses for TNO 46704455668' do
+            addresses = Klarna::Client.get_addresses(:tno => tno, :pno_encoding => 2, :type => 6)
+
+            expect(addresses).to eq(person_addresses)
           end
         end
       end
