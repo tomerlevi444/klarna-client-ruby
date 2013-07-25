@@ -37,7 +37,7 @@ First, set up the connection settings to Klarna's API server.
 
 You can then execute any API request without suplying credentials:
 
-    Klarna::Client.get_addresses('410321-9202',2,5,'')
+    Klarna::Client.get_addresses(:pno => '410321-9202', :pno_encoding => 2, :type => 5)
 
 
 ### Multiple stores configuration
@@ -53,7 +53,7 @@ Create a client on every single request you want to make independently:
 
 You can exucute any API request by using the client connection set up above:
 
-    client.get_addresses('410321-9202',2,5,'')
+    client.get_addresses(:pno => '410321-9202', :pno_encoding => 2, :type => 5)
 
 ## Development and Testing
 
