@@ -6,7 +6,7 @@ An XMLRPC client for Klarna's API.
 
 Add this line to your application's Gemfile:
 
-    gem 'klarna-client'
+    gem 'klarna-client-ruby', github: 'klarna/klarna-client-ruby'
 
 And then execute:
 
@@ -14,7 +14,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install klarna-client
+    $ gem install klarna-client-ruby
 
 ## Supported methods
 
