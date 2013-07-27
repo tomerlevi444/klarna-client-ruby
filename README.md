@@ -1,4 +1,4 @@
-# Klarna::Client
+# Klarna Ruby Client
 
 An XMLRPC client for Klarna's API.
 
@@ -6,7 +6,7 @@ An XMLRPC client for Klarna's API.
 
 Add this line to your application's Gemfile:
 
-    gem 'klarna-client'
+    gem 'klarna-client-ruby', github: 'klarna/klarna-client-ruby'
 
 And then execute:
 
@@ -14,7 +14,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install klarna-client
+    $ gem install klarna-client-ruby
 
 ## Supported methods
 
@@ -42,7 +42,7 @@ You can then execute any API request without suplying credentials:
 
 ### Multiple stores configuration
 
-Create a client on every single request you want to make independently:
+Create a client on every single request you want to make:
 
     client = Klarna::Client.new({
       :hostname     => 'payment.testdrive.klarna.com',
@@ -51,7 +51,7 @@ Create a client on every single request you want to make independently:
       :store_secret => 'dr.alban'
     })
 
-You can exucute any API request by using the client connection set up above:
+You can execute any API request by using the client connection set up above:
 
     client.get_addresses(:pno => '410321-9202', :pno_encoding => 2, :type => 5)
 
