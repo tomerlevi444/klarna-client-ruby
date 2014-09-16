@@ -10,7 +10,7 @@ module Klarna
     end
 
     def call(method, *args)
-      xmlrpc_client.call(method, *args)
+      sleep(1) #xmlrpc_client.call(method, *args)
     end
 
     private
